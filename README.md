@@ -12,7 +12,11 @@ In the project directory, you can run:
 4. environment variable
 5. 
 
-
+## steps
+1. Make a Responsive Navbar
+2. Add Responsive Slider
+3. Add A responsive expensive section
+4. Add Footer
 
 
 
