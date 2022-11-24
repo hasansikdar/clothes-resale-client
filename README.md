@@ -5,6 +5,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+## Rquirement tools 
+1. React Router dom
+2. React icons
+3. firebase
+4. environment variable
+5. 
+
+
+
+
 
 ### `npm start`
 
