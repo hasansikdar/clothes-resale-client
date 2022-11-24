@@ -1,7 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Context/UserContext';
 
 const Header = () => {
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        const agree = window.confirm('Are your Sure you want to Logout');
+
+        if (agree) {
+            logout()
+                .then(res => {
+                    navigate('/login');
+                })
+                .catch(error => console.log(error))
+        }
+
+
+    }
+
+
     return (
         <div className="navbar w-11/12 mx-auto py-5 bg-base-100">
             <div className="navbar-start">
@@ -39,25 +58,31 @@ const Header = () => {
                             <li><a>Submenu 2</a></li>
                         </ul>
                     </li>
-                    <li><a>Item 3</a></li>
+                    <li><Link to='/add-product'>Add Products</Link></li>
                 </ul>
             </div>
             <div className="navbar-end">
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img src="https://placeimg.com/80/80/people" />
+                            <img src={user ? user?.photoURL : 'https://static.thenounproject.com/png/55393-200.png'} />
                         </div>
                     </label>
                     <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        {user?.email ?
+                            <>
+                                <li>
+                                    <Link to='/update-profile'>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">{user?.displayName}</span>
+                                        </a>
+                                    </Link>
+                                </li>
+                                <li><button onClick={handleLogout}>Logout</button></li>
+                            </>
+                            :
+                            <li><Link to='/login'>Login</Link></li>}
                     </ul>
                 </div>
             </div>

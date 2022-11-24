@@ -10,14 +10,18 @@ In the project directory, you can run:
 2. React icons
 3. firebase
 4. environment variable
-5. 
+5. React hot toast
+6. React Form hook
+7. React tanstack query
+8. 
 
 ## steps
 1. Make a Responsive Navbar
 2. Add Responsive Slider
 3. Add A responsive expensive section
 4. Add Footer
-
+5. Make Add Product Page
+6. Products section added
 
 
 ### `npm start`

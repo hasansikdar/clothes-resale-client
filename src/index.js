@@ -3,12 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Toaster } from 'react-hot-toast';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import UserContext from './Context/UserContext';
 
+const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <App />
+    <QueryClientProvider client={queryClient}>
+      <UserContext>
+        <App />
+      </UserContext>
+      <Toaster />
+    </QueryClientProvider>
   </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
