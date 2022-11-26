@@ -1,0 +1,20 @@
+[
+    {
+        "productCategory":"men",
+        "ProductName":"Man Clothes",
+        "image": "https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "ProductDescription": "Men's Clothing Online In Bangladesh At Best Price - Daraz.com.bd. Experience online mens clothes shopping in bangladesh from comfort of your home."
+    },
+    {
+        "productCategory":"Women",
+        "ProductName":"Woman Clothes",
+        "image": "https://images.unsplash.com/flagged/photo-1557865797-fed840dee261?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1228&q=80",
+        "ProductDescription": "Free shipping and returns on all women's clothing. Shop dresses, tops, jackets, jeans, sweaters and more from a variety of top brands and designers."
+    },
+    {
+        "productCategory":"Baby",
+        "ProductName":"Baby Clothes",
+        "image": "https://images.unsplash.com/photo-1610122748280-d0ae76b10750?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "ProductDescription": "Shop Target for baby clothesfrom newborn to toddler Target has you covered Free shipping on orders 35 free returns plus sameday instore pickup."
+    }
+]

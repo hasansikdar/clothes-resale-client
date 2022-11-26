@@ -22,7 +22,7 @@ const Register = () => {
         createuser(email, password)
             .then(res => {
                 updateuserinformationProfile(loginData)
-                
+
             })
             .catch(error => {
                 console.log(error);
@@ -53,40 +53,41 @@ const Register = () => {
                 }
 
                 updateuserProfile(userInfo)
-                .then(res => {
-                    saveUserInDb(loginData);
-                })
-                .catch(error => {
-                    console.log(error)
-                    toast.error(error.message);
-                })
+                    .then(res => {
+                        saveUserInDb(loginData);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        toast.error(error.message);
+                    })
 
 
             })
     }
 
     const saveUserInDb = (loginData) => {
-        const {name, email} = loginData;
+        const { name, email } = loginData;
         const userInfo = {
             name,
             email,
+            seller: loginData?.seller ? 'seller': 'user',
         }
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://resale-clothes.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
             body: JSON.stringify(userInfo)
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.acknowledged){
-                seLoading(false);
-                toast.success('user created successful')
-                navigate('/');
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    seLoading(false);
+                    toast.success('user created successful')
+                    navigate('/');
+                }
+            })
     }
 
 
@@ -135,8 +136,14 @@ const Register = () => {
                                 })} type="password" placeholder="Password" className="input input-bordered" />
                                 {errors.password && <span className='text-red-500 mt-2'>{errors?.password?.message}</span>}
                             </div>
+                            <div className="form-control">
+                                <label className="label cursor-pointer">
+                                    <span className="label-text font-bold">Is It Your Seller Account ?</span>
+                                    <input {...register('seller')} type="checkbox" className="checkbox" />
+                                </label>
+                            </div>
                             <div className="form-control mt-6">
-                                <button disabled={loading} className="btn btn-primary">{loading ? <div className='text-center'><span className="btn btn-square loading"></span></div>:'Register'}</button>
+                                <button disabled={loading} className="btn btn-primary">{loading ? <div className='text-center'><span className="btn btn-square loading"></span></div> : 'Register'}</button>
                             </div>
                             <div className='mt-4'>
                                 <span>If you have an Account Please <Link to='/login' className='link text-blue-500'>Login Now</Link></span>
