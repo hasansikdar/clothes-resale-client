@@ -58,7 +58,6 @@ const Header = () => {
                             <li><a>Submenu 2</a></li>
                         </ul>
                     </li>
-                    <li><Link to='/add-product'>Add Products</Link></li>
                 </ul>
             </div>
             <div className="navbar-end">
@@ -79,6 +78,7 @@ const Header = () => {
                                         </a>
                                     </Link>
                                 </li>
+                                <li><Link to='/dashboard'>DashBoard</Link></li>
                                 <li><button onClick={handleLogout}>Logout</button></li>
                             </>
                             :

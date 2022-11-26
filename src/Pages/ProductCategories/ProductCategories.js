@@ -7,6 +7,7 @@ import Modal from '../Shared/Modal/Modal';
 const ProductCategories = () => {
     const products = useLoaderData();
     const [productModal, setProdcutModal] = useState({});
+    const [opentModal, setOpenModal] = useState(false);
 
     const handleSendModalProduct = product => {
         setProdcutModal(product);
@@ -19,10 +20,10 @@ const ProductCategories = () => {
 
             <div className='grid product mt-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                 {
-                    products.map(product => <Product handleSendModalProduct={handleSendModalProduct} key={product?._id} product={product}></Product>)
+                    products.map(product => <Product setOpenModal={setOpenModal} handleSendModalProduct={handleSendModalProduct} key={product?._id} product={product}></Product>)
                 }
             </div>
-            <Modal productModal={productModal}></Modal>
+            {opentModal && <Modal setOpenModal={setOpenModal} productModal={productModal}></Modal>}
         </div>
     );
 };

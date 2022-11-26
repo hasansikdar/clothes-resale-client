@@ -3,10 +3,13 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
+import { FaGoogle } from "react-icons/fa";
+
+
 
 const Login = () => {
-    const {login, resetpassword} = useContext(AuthContext);
-    const [loading, setLoading ] = useState(false);
+    const { login,signinwithgoogle, resetpassword } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
@@ -16,35 +19,89 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleLogin = loginData => {
-        const {email, password} = loginData;
+        const { email, password } = loginData;
         setLoading(true);
         login(email, password)
-        .then(res => {
-            toast.success('Login Success');
-            setLoading(false);
-            navigate(from, {replace:false});
-        })
-        .then(error => {
-            console.log(error)
-            toast.error(error.message);
-        })
+            .then(res => {
+                toast.success('Login Success');
+                setLoading(false);
+                navigate(from, { replace: false });
+            })
+            .then(error => {
+                console.log(error)
+                toast.error(error.message);
+            })
     }
+    
+
+
 
     const handleResetPassword = () => {
         const email = window.prompt('Pease Enter your Email');
 
-        if(email){
+        if (email) {
             resetpassword(email)
-            .then(res => {
-                alert('Please Check your Email And Reset Your Password');
-            })
-            .catch(error => {
-                console.log(error)
-                toast.error(error.message);
-            });
+                .then(res => {
+                    alert('Please Check your Email And Reset Your Password');
+                })
+                .catch(error => {
+                    console.log(error)
+                    toast.error(error.message);
+                });
         }
     }
 
+
+    const handleGoogleLogin  = () => {
+        signinwithgoogle()
+        .then(res => {
+            const user = res.user;
+            checkedUserAvailable(user);
+        })
+        .catch(error => {
+            toast.error(error.message);
+            console.log(error);
+        })
+    }
+
+    const checkedUserAvailable = user => {
+        fetch(`https://resale-clothes.vercel.app/users?email=${user?.email}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.length){
+                toast.success('Login Successful');
+                return navigate('/');
+            }
+            saveUserInDb(user);
+        })
+    }
+
+
+
+    const saveUserInDb = (loginData) => {
+        const { displayName, email,photoURL } = loginData;
+        const userInfo = {
+            name: displayName,
+            email,
+            seller: 'user',
+            userPhoto:photoURL,
+        }
+
+        fetch('https://resale-clothes.vercel.app/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(userInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('user created successful')
+                    navigate('/');
+                }
+            })
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -69,10 +126,10 @@ const Login = () => {
                                 </label>
                                 <input {...register('password', {
                                     required: 'Password is Required',
-                                    minLength: {value: 8, message: 'Password Must be 8 Charecter'},
-                                    maxLength: {value: 12, message: 'Password Maximum 12 Charecter'},
-                                    pattern: {value: /[.*+?^${}()|[\]\\]/g, message: 'Password Must Be Strong'}
-                                    
+                                    minLength: { value: 8, message: 'Password Must be 8 Charecter' },
+                                    maxLength: { value: 12, message: 'Password Maximum 12 Charecter' },
+                                    pattern: { value: /[.*+?^${}()|[\]\\]/g, message: 'Password Must Be Strong' }
+
                                 })} type="password" placeholder="Password" className="input input-bordered" />
                                 {errors.password && <span className='text-red-500 mt-2'>{errors?.password?.message}</span>}
                                 <label className="label">
@@ -80,13 +137,18 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button disabled={loading} className="btn btn-primary">{loading ? <div className='text-center'><span className="btn btn-square loading"></span></div>: 'Login'}</button>
-                            </div>
-                            <div className='mt-4'>
-                                <span>If you have not Account Please <Link to='/register' className='link text-blue-500'>Create New Account</Link></span>
+                                <button disabled={loading} className="btn btn-primary">{loading ? <div className='text-center'><span className="btn btn-square loading"></span></div> : 'Login'}</button>
                             </div>
                         </div>
                     </form>
+                    <div className='mx-8 mb-5'>
+                        <div className="form-control mt-6">
+                            <button onClick={handleGoogleLogin} className="btn btn-primary"><FaGoogle className='mr-5 text-blue-500'></FaGoogle> Google</button>
+                        </div>
+                        <div className='mt-4'>
+                            <span>If you have not Account Please <Link to='/register' className='link text-blue-500'>Create New Account</Link></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

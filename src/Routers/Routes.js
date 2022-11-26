@@ -8,6 +8,11 @@ import Register from '../Pages/Register/Register';
 import UpdateProfile from '../Pages/Profile/Profile';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import ProductCategories from '../Pages/ProductCategories/ProductCategories';
+import Dashboard from '../Pages/Dashboard/Dashboard';
+import MyOrders from '../Pages/Dashboard/MyOrders/MyOrders';
+import MyProducts from '../Pages/Dashboard/MyProducts/MyProducts';
+import MyBuyers from '../Pages/Dashboard/MyBuyers/MyBuyers';
+import AllUsers from '../Pages/Dashboard/AllUsers/AllUsers';
 
 export const Routes = createBrowserRouter([
     {
@@ -21,10 +26,6 @@ export const Routes = createBrowserRouter([
             {
                 path: '/home',
                 element: <Home></Home>
-            },
-            {
-                path: '/add-product',
-                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
             },
             {
                 path: '/login',
@@ -42,6 +43,36 @@ export const Routes = createBrowserRouter([
                 path: '/productCategory/:id',
                 element: <ProductCategories></ProductCategories>,
                 loader: ({params}) => fetch(`https://resale-clothes.vercel.app/productCategory/${params.id}`)
+            },
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+            {
+                path: '/dashboard/my-orders',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard',
+                element: <h1 className='text-center text-5xl my-10'>DashBoard</h1>
+            },
+            {
+                path: '/dashboard/my-products',
+                element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/my-buyers',
+                element: <MyBuyers></MyBuyers>
+            },
+            {
+                path: '/dashboard/all-users',
+                element: <AllUsers></AllUsers>
+            },
+            {
+                path: '/dashboard/add-product',
+                element: <AddProduct></AddProduct>
             }
         ]
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 
-const Product = ({product, handleSendModalProduct}) => {
+const Product = ({product, handleSendModalProduct, setOpenModal}) => {
 
     const {productImage, productName, productCategory,productUsed, productDescription,currentTime,curretDate,productLocation,productOriginalPrice,userName,productSellingPrice, productPrice} = product;
     return (
@@ -20,7 +20,7 @@ const Product = ({product, handleSendModalProduct}) => {
 
                 <p>{productDescription}</p>
                 <div className="card-actions justify-end">
-                    <label onClick={() => handleSendModalProduct(product)} htmlFor="product-modal" className="btn btn-primary">Book Now</label>
+                    <label onClick={() => {handleSendModalProduct(product); setOpenModal(true)}} htmlFor="product-modal" className="btn btn-primary">Book Now</label>
                 </div>
             </div>
         </div>

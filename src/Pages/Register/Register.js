@@ -54,7 +54,7 @@ const Register = () => {
 
                 updateuserProfile(userInfo)
                     .then(res => {
-                        saveUserInDb(loginData);
+                        saveUserInDb(loginData, imageLink);
                     })
                     .catch(error => {
                         console.log(error)
@@ -65,12 +65,14 @@ const Register = () => {
             })
     }
 
-    const saveUserInDb = (loginData) => {
+    const saveUserInDb = (loginData, imageLink) => {
         const { name, email } = loginData;
         const userInfo = {
             name,
             email,
+            userPhoto:imageLink,
             seller: loginData?.seller ? 'seller': 'user',
+
         }
 
         fetch('https://resale-clothes.vercel.app/users', {
