@@ -1,9 +1,29 @@
-import React from 'react';
+import { async } from '@firebase/util';
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
-const UserRow = ({usr, deleteOrder}) => {
-    const {name,email,userPhoto, username,productPrice,seller,mettingLocation,userOrderEmail,phoneNumber, _id } = usr;
+const UserRow = ({usr, deleteOrder, refetch}) => {
+    const {name,email,userPhoto, username,productPrice, role,mettingLocation,userOrderEmail,phoneNumber, _id } = usr;
 
-    console.log(usr)
+ 
+
+    const handleMakeAdmin = id => {
+        
+        fetch(`https://resale-clothes.vercel.app/users/admin/${id}`,{
+                method: 'PUT',
+            })
+            .then(res => res.json())
+            .then(data => {
+               if(data.acknowledged){
+                    toast.success('Admin make Successful')
+                   refetch();
+               }
+                
+            })
+    }
+
+
 
     return (
         <tr>
@@ -26,9 +46,9 @@ const UserRow = ({usr, deleteOrder}) => {
                 <br />
                 <span className="badge badge-ghost badge-sm">{phoneNumber}</span>
             </td>
-            <td>{seller}</td>
+            <td>{role}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+               {role !== "admin" && <button onClick={() =>handleMakeAdmin(_id)} className="btn btn-ghost btn-xs">Make Admin</button>}
             </th>
         </tr>
     );

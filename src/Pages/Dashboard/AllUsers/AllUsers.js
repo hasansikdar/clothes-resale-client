@@ -15,7 +15,6 @@ const AllUsers = () => {
         }
     })
 
-    console.log(users);
 
     // const deleteOrder = id => {
     //     const agreeDelete = window.confirm('Are you sure You want to Cancell Order');
@@ -53,7 +52,7 @@ const AllUsers = () => {
                             </thead>
                             <tbody>
                                 {
-                                    users.map(usr => <UserRow key={usr?._id} usr={usr}></UserRow>)
+                                    users.map(usr => <UserRow refetch={refetch} key={usr?._id} usr={usr}></UserRow>)
                                 }
                             </tbody>
 

@@ -23,7 +23,7 @@ const Products = () => {
                 </div>
 
                 :
-                <><h1 className='text-5xl text-center'>Products {products.length}</h1>
+                <><h1 className='text-5xl text-center text-transform: uppercase'>Categories</h1>
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-10 my-20'>
                         {
                             products.map(product => <Category key={product?._id} product={product}></Category>)

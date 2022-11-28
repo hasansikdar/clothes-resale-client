@@ -13,7 +13,7 @@ In the project directory, you can run:
 5. React hot toast
 6. React Form hook
 7. React tanstack query
-8. 
+8. React Photo View
 
 ## steps
 1. Make a Responsive Navbar

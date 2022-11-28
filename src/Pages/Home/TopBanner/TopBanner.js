@@ -2,7 +2,7 @@ import React from 'react';
 
 const TopBanner = () => {
     return (
-        <div className='top-banner'>
+        <div className='top-banner' data-carousel="slide">
             <div className="carousel w-full">
                 <div id="item1" className="carousel-item w-full">
                     <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" />

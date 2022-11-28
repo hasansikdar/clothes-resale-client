@@ -25,12 +25,12 @@ const AddProduct = () => {
     const handleAddProduct = productValue => {
         // console.log(data);
         setLoading(true);
-        const { productName, productDescription, productLocation, productOriginalPrice, productSellingPrice, productUsed, productCategory } = productValue;
+        const { productName,condition, productDescription, productLocation, productOriginalPrice, productSellingPrice, productUsed, productCategory } = productValue;
         const imageFile = productValue?.productImage[0];
         // console.log(imageFile);
 
-        console.log(imageFile);
 
+        console.log(productValue);
         const formData = new FormData();
         formData.append('image', imageFile);
         const url = 'https://api.imgbb.com/1/upload?key=20479324d2295d17d9027f196b869026';
@@ -57,9 +57,9 @@ const AddProduct = () => {
                     userName: user?.displayName,
                     userEmail: user?.email,
                     userPhoto: user?.photoURL,
+                    condition,
                 }
 
-                console.log(product);
 
 
                 fetch('https://resale-clothes.vercel.app/addProduct', {
@@ -69,16 +69,16 @@ const AddProduct = () => {
                     },
                     body: JSON.stringify(product)
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.acknowledged){
-                        reset();
-                        setLoading(false);
-                        toast.success('Product Added Successful')
-                        navigate('/');
-                    }
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.acknowledged) {
+                            reset();
+                            setLoading(false);
+                            toast.success('Product Added Successful')
+                            navigate('/');
+                        }
 
-                })
+                    })
 
             })
 
@@ -128,6 +128,13 @@ const AddProduct = () => {
                                 <textarea {...register('productDescription', { required: true })} type="text" placeholder="Product Description" className="input input-bordered" />
                                 {errors.productDescription && <span className='text-red-500 mt-2'>This field is required</span>}
                             </div>
+
+                            <label htmlFor="">Select Product Condition</label>
+                            <select {...register('condition', {required: true})} className="select select-bordered w-full max-w-xs">
+                                <option  selected>Good</option>
+                                <option>Excellent</option>
+                                <option>Fair</option>
+                            </select>
                             <label className="label">
                                 <span className="label-text">Select Your Category</span>
                             </label>
@@ -139,7 +146,7 @@ const AddProduct = () => {
                             </select>
                             {errors.productCategory && <span className='text-red-500 mt-2'>This field is required</span>}
                             <div className="form-control mt-6">
-                                <button disabled={loading} className="btn btn-primary">{loading ? <div className='text-center'><span className="btn btn-square loading"></span></div> : 'Add Product'}</button>
+                                <button className="btn btn-primary">{loading ? <div className='text-center'><span className="btn btn-square loading"></span></div> : 'Add Product'}</button>
                             </div>
                         </div>
                     </form>
