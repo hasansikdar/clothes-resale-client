@@ -10,7 +10,7 @@ const UserRow = ({usr, deleteOrder, refetch}) => {
 
     const handleMakeAdmin = id => {
         
-        fetch(`http://localhost:5000/users/admin/${id}`,{
+        fetch(`https://resale-clothes.vercel.app/users/admin/${id}`,{
                 method: 'PUT',
             })
             .then(res => res.json())

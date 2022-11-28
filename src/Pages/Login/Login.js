@@ -66,7 +66,7 @@ const Login = () => {
     }
 
     const checkedUserAvailable = user => {
-        fetch(`http://localhost:5000/users?email=${user?.email}`)
+        fetch(`https://resale-clothes.vercel.app/users?email=${user?.email}`)
         .then(res => res.json())
         .then(data => {
             if(data.length){
@@ -84,11 +84,11 @@ const Login = () => {
         const userInfo = {
             name: displayName,
             email,
-            seller: 'user',
+            role: 'user',
             userPhoto:photoURL,
         }
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://resale-clothes.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

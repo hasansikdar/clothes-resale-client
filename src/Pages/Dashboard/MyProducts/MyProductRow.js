@@ -10,7 +10,7 @@ const MyProductRow = ({ product, deleteMyProduct, refetch }) => {
 
         if (agree) {
             setLoading(true);
-            fetch(`http://localhost:5000/dashboard/my-products/${id}`, {
+            fetch(`https://resale-clothes.vercel.app/dashboard/my-products/${id}`, {
                 method: 'PUT',
             })
                 .then(res => res.json())

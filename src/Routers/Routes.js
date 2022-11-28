@@ -16,6 +16,8 @@ import AllUsers from '../Pages/Dashboard/AllUsers/AllUsers';
 import AdminPrivateRoute from '../PrivateRoute/AdminPrivateRoute';
 import SellerPrivateRoute from '../PrivateRoute/SellerPrivateRoute';
 import UserPrivateRoute from '../PrivateRoute/UserPrivateRoute';
+import ErrorPage from '../Pages/ErrorPage/ErrorPage';
+import Blogs from '../Pages/Blogs/Blogs';
 
 export const Routes = createBrowserRouter([
     {
@@ -44,9 +46,13 @@ export const Routes = createBrowserRouter([
             },
             {
                 path: '/productCategory/:id',
-                element: <ProductCategories></ProductCategories>,
-                loader: ({params}) => fetch(`http://localhost:5000/productCategory/${params.id}`)
+                element: <PrivateRoute><ProductCategories></ProductCategories></PrivateRoute>,
+                loader: ({params}) => fetch(`https://resale-clothes.vercel.app/productCategory/${params.id}`)
             },
+            {
+                path: '/blogs',
+                element: <Blogs></Blogs>
+            }
         ]
     },
     {
@@ -78,5 +84,9 @@ export const Routes = createBrowserRouter([
                 element: <SellerPrivateRoute><AddProduct></AddProduct></SellerPrivateRoute>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <ErrorPage></ErrorPage>
     }
 ])

@@ -71,11 +71,11 @@ const Register = () => {
             name,
             email,
             userPhoto:imageLink,
-            seller: loginData?.seller ? 'seller': 'user',
+            role: loginData?.seller ? 'seller': 'user',
 
         }
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://resale-clothes.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

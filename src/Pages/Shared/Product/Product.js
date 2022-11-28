@@ -27,8 +27,8 @@ const Product = ({ product, handleSendModalProduct, setOpenModal }) => {
                 <span>Date: {curretDate} | Time: {currentTime}</span>
                 <p>Original Price: ${productOriginalPrice}</p>
                 <p>Selling Price: ${productSellingPrice}</p>
-                <p>Seller Name: ${userName}</p>
-                <p>Product Loaction: ${productLocation}</p>
+                <p>Seller Name: {userName}</p>
+                <p>Product Loaction: {productLocation}</p>
                 <p>Product Used: {productUsed}</p>
                 <p>Product Condition: {condition}</p>
                 <br></br>
