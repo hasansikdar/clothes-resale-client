@@ -9,7 +9,7 @@ const AllUsers = () => {
     const { data: users = [], loading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(`https://resale-clothes.vercel.app/allUsers`);
+            const res = await fetch(`http://localhost:5000/allUsers`);
             const data = await res.json();
             return data;
         }
@@ -20,7 +20,7 @@ const AllUsers = () => {
     //     const agreeDelete = window.confirm('Are you sure You want to Cancell Order');
 
     //     if (agreeDelete) {
-    //         fetch(`https://resale-clothes.vercel.app/users/${id}`, {
+    //         fetch(`http://localhost:5000/users/${id}`, {
     //             method: 'DELETE',
     //         })
     //             .then(res => res.json())

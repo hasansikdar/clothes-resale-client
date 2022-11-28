@@ -9,7 +9,7 @@ const MyOrders = () => {
     const { data: myOrders = [], loading, refetch } = useQuery({
         queryKey: ['myOrders', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://resale-clothes.vercel.app/myOrders?email=${user?.email}`);
+            const res = await fetch(`http://localhost:5000/myOrders?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -20,7 +20,7 @@ const MyOrders = () => {
         const agreeDelete = window.confirm('Are you sure You want to Cancell Order');
 
         if (agreeDelete) {
-            fetch(`https://resale-clothes.vercel.app/myOrders/${id}`, {
+            fetch(`http://localhost:5000/myOrders/${id}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())

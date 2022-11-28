@@ -33,7 +33,7 @@ const Modal = ({ productModal, setOpenModal }) => {
 
     // order booking in bd 
     const bookingOrder = order => {
-        fetch('https://resale-clothes.vercel.app/orders', {
+        fetch('http://localhost:5000/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

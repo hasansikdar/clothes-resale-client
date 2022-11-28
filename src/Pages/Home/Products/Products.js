@@ -7,7 +7,7 @@ const Products = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('https://resale-clothes.vercel.app/products')
+        fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => {
                 setProducts(data);

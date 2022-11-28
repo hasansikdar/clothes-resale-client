@@ -6,9 +6,12 @@ import Footer from '../Shared/Footer/Footer';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
-    const [role] = IsAdmin(user?.email);
+    const [role, isAdminLoading] = IsAdmin(user?.email);
 
-    console.log(role);
+    
+    if(isAdminLoading){
+        return <h1 className='text-center text-5xl'>Loading...</h1>
+    }
 
     return (
         <div>
