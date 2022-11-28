@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
-const MyProductRow = ({ product, deleteMyProduct }) => {
-    const { productImage, productName, productSellingPrice, curretDate, currentTime, productLocation, userEmail, productCategory, _id } = product;
+const MyProductRow = ({ product, deleteMyProduct, refetch }) => {
+    const { productImage, advertise, productName, productSellingPrice, curretDate, currentTime, productLocation, userEmail, productCategory, _id } = product;
+    const [loading, setLoading] = useState(true);
 
-    console.log(product)
+    const handleProductAdvertise = id => {
+        const agree = window.confirm('Are you sure you want to advertise your product');
+
+        if (agree) {
+            setLoading(true);
+            fetch(`http://localhost:5000/dashboard/my-products/${id}`, {
+                method: 'PUT',
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.acknowledged) {
+                        toast.success('Product Advertise in Home Page');
+                        refetch();
+                        setLoading(false);
+                    }
+                })
+        }
+    }
+
+
+
     return (
         <tr>
             <th>
@@ -31,7 +54,7 @@ const MyProductRow = ({ product, deleteMyProduct }) => {
             </td>
             <td>${productSellingPrice}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                {advertise !== 'advertise' && <button onClick={() => handleProductAdvertise(_id)} className="btn btn-ghost btn-xs">Advertise</button>}
             </th>
         </tr>
     );

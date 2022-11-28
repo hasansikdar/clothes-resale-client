@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/UserContext';
 
-const Modal = ({ productModal, setOpenModal }) => {
+const Modal = ({ productModal, setOpenModal,refetch }) => {
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const { productSellingPrice, productImage, userEmail,productCategory,productName, _id } = productModal;
@@ -43,9 +43,10 @@ const Modal = ({ productModal, setOpenModal }) => {
         .then(res => res.json())
         .then(data => {
             if(data.acknowledged){
-                setLoading(false);
                 toast.success('Order Successfull');
                 setOpenModal(false);
+                refetch();
+                setLoading(false);
             }
         })
     }

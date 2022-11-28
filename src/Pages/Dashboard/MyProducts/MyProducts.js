@@ -60,7 +60,7 @@ const MyProducts = () => {
                             </thead>
                             <tbody>
                                 {
-                                    myProducts.map(product => <MyProductRow deleteMyProduct={deleteMyProduct} key={product?._id} product={product}></MyProductRow>)
+                                    myProducts.map(product => <MyProductRow refetct={refetch} deleteMyProduct={deleteMyProduct} key={product?._id} product={product}></MyProductRow>)
                                 }
                             </tbody>
 

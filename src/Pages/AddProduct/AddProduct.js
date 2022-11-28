@@ -30,7 +30,6 @@ const AddProduct = () => {
         // console.log(imageFile);
 
 
-        console.log(productValue);
         const formData = new FormData();
         formData.append('image', imageFile);
         const url = 'https://api.imgbb.com/1/upload?key=20479324d2295d17d9027f196b869026';
@@ -41,7 +40,7 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(ImageLink => {
-                console.log(ImageLink)
+                
                 const productImageLink = ImageLink?.data?.display_url;
                 const product = {
                     productName,

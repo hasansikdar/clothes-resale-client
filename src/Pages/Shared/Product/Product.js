@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Context/UserContext';
+import IsAdmin from '../../../CustomHooks/IsAdmin';
 import Modal from '../Modal/Modal';
 
 const Product = ({ product, handleSendModalProduct, setOpenModal }) => {
+    const {user} = useContext(AuthContext);
+
+    const [role] = IsAdmin(user?.email)
+
+
 
     const { productImage, productName,condition, productCategory, productUsed, productDescription, currentTime, curretDate, productLocation, productOriginalPrice, userName, productSellingPrice, productPrice } = product;
     return (
@@ -28,7 +35,7 @@ const Product = ({ product, handleSendModalProduct, setOpenModal }) => {
 
                 <p>{productDescription}</p>
                 <div className="card-actions justify-end">
-                    <label onClick={() => { handleSendModalProduct(product); setOpenModal(true) }} htmlFor="product-modal" className="btn btn-primary">Order Now</label>
+                    <label disabled={role?.role === 'seller' || role?.role === 'admin'} onClick={() => { handleSendModalProduct(product); setOpenModal(true) }} htmlFor="product-modal" className="btn btn-primary">Order Now</label>
                 </div>
             </div>
         </div>
